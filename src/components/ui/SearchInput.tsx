@@ -8,7 +8,7 @@ export const SearchInput = () => {
   if (!ctx) {
     throw new Error('SearchInput must be rendered inside a TableDataProvider');
   }
-  const { tasks, setTasks, originalTasks } = ctx;
+  const { setTasks, originalTasks } = ctx;
 
   const [search, setSearch] = useState('');
   const [debounced, setDebounced] = useState(search);
