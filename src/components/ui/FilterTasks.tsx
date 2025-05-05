@@ -1,9 +1,46 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as DropdownMenu from './dropdown-menu';
 import { Button } from './button';
 import { ListFilter } from 'lucide-react';
+import { TableDataContext } from '@/context/TableDataContext';
+import { Priority, Status } from '@/data/tasks';
 
 export const FilterTasks = () => {
+  // context
+  const ctx = useContext(TableDataContext);
+  if (!ctx) {
+    throw new Error('FilterTask must be rendered inside a TableDataProvider');
+  }
+  const { setTasks, originalTasks } = ctx;
+
+  // filter state: undefined = no filter
+  const [priorityFilter, setPriorityFilter] = useState<Priority | undefined>(
+    undefined
+  );
+
+  const [statusFilter, setStatusFilter] = useState<Status | undefined>(
+    undefined
+  );
+
+  // when filters change, recompute tasks
+  useEffect(() => {
+    let filteredTasks = originalTasks;
+
+    if (priorityFilter) {
+      filteredTasks = filteredTasks.filter(
+        (task) => task.priority === priorityFilter
+      );
+    }
+
+    if (statusFilter) {
+      filteredTasks = filteredTasks.filter(
+        (task) => task.status === statusFilter
+      );
+    }
+
+    setTasks(filteredTasks);
+  }, [priorityFilter, statusFilter]);
+
   return (
     <DropdownMenu.DropdownMenu>
       <DropdownMenu.DropdownMenuTrigger asChild>
@@ -20,26 +57,48 @@ export const FilterTasks = () => {
           Filter by Priority
         </DropdownMenu.DropdownMenuLabel>
         <DropdownMenu.DropdownMenuSeparator />
-        <DropdownMenu.DropdownMenuCheckboxItem checked={true}>
-          High
-        </DropdownMenu.DropdownMenuCheckboxItem>
-        <DropdownMenu.DropdownMenuCheckboxItem>
-          Medium
-        </DropdownMenu.DropdownMenuCheckboxItem>
-        <DropdownMenu.DropdownMenuCheckboxItem>
-          Low
-        </DropdownMenu.DropdownMenuCheckboxItem>
+
+        <DropdownMenu.DropdownMenuRadioGroup
+          value={priorityFilter}
+          onValueChange={(val) =>
+            setPriorityFilter((prev) =>
+              prev === val ? undefined : (val as Priority)
+            )
+          }
+        >
+          <DropdownMenu.DropdownMenuRadioItem value="High">
+            High
+          </DropdownMenu.DropdownMenuRadioItem>
+          <DropdownMenu.DropdownMenuRadioItem value="Medium">
+            Medium
+          </DropdownMenu.DropdownMenuRadioItem>
+          <DropdownMenu.DropdownMenuRadioItem value="Low">
+            Low
+          </DropdownMenu.DropdownMenuRadioItem>
+        </DropdownMenu.DropdownMenuRadioGroup>
+
         <DropdownMenu.DropdownMenuSeparator />
+
         <DropdownMenu.DropdownMenuLabel>
           Filter by Status
         </DropdownMenu.DropdownMenuLabel>
         <DropdownMenu.DropdownMenuSeparator />
-        <DropdownMenu.DropdownMenuCheckboxItem checked={true}>
-          In Progress
-        </DropdownMenu.DropdownMenuCheckboxItem>
-        <DropdownMenu.DropdownMenuCheckboxItem>
-          Completed
-        </DropdownMenu.DropdownMenuCheckboxItem>
+
+        <DropdownMenu.DropdownMenuRadioGroup
+          value={statusFilter}
+          onValueChange={(val) =>
+            setStatusFilter((prev) =>
+              prev === val ? undefined : (val as Status)
+            )
+          }
+        >
+          <DropdownMenu.DropdownMenuRadioItem value="Completed">
+            Completed
+          </DropdownMenu.DropdownMenuRadioItem>
+          <DropdownMenu.DropdownMenuRadioItem value="In Progress">
+            In Progress
+          </DropdownMenu.DropdownMenuRadioItem>
+        </DropdownMenu.DropdownMenuRadioGroup>
       </DropdownMenu.DropdownMenuContent>
     </DropdownMenu.DropdownMenu>
   );
