@@ -39,7 +39,7 @@ export const FilterTasks = () => {
     }
 
     setTasks(filteredTasks);
-  }, [priorityFilter, statusFilter]);
+  }, [priorityFilter, statusFilter, originalTasks, setTasks]);
 
   return (
     <DropdownMenu.DropdownMenu>

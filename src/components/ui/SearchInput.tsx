@@ -8,7 +8,7 @@ export const SearchInput = () => {
   if (!ctx) {
     throw new Error('SearchInput must be rendered inside a TableDataProvider');
   }
-  const { setTasks, originalTasks } = ctx;
+  const { tasks, setTasks, originalTasks } = ctx;
 
   const [search, setSearch] = useState('');
   const [debounced, setDebounced] = useState(search);
@@ -30,7 +30,7 @@ export const SearchInput = () => {
       );
       setTasks(filteredTasks);
     }
-  }, [debounced]);
+  }, [debounced, originalTasks, setTasks]);
 
   return (
     <div className="pr-16 flex w-[383px]">
