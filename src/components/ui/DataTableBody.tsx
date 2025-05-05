@@ -2,6 +2,7 @@ import { TableDataContext } from '@/context/TableDataContext';
 import { useContext } from 'react';
 import * as Table from './table';
 import { TableEntry } from './TableEntry';
+import { NoTaskFound } from './NoTaskFound';
 
 export const DataTableBody = () => {
   const ctx = useContext(TableDataContext);
@@ -16,9 +17,13 @@ export const DataTableBody = () => {
 
   return (
     <Table.TableBody>
-      {tasks.map((task, index) => (
-        <TableEntry key={task.id} task={task} index={index} />
-      ))}
+      {tasks.length > 0 ? (
+        tasks.map((task, index) => (
+          <TableEntry key={task.id} task={task} index={index} />
+        ))
+      ) : (
+        <NoTaskFound />
+      )}
     </Table.TableBody>
   );
 };
