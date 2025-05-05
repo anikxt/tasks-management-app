@@ -35,7 +35,7 @@ export const TableEntry: React.FC<TableEntryProps> = ({ task, index }) => {
       </Table.TableCell>
 
       <EditTask task={task} />
-      <DeleteTask />
+      <DeleteTask taskId={task.id} />
     </Table.TableRow>
   );
 };

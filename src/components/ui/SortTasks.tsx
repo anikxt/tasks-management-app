@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import * as DropdownMenu from './dropdown-menu';
 import { Button } from './button';
 import { ArrowUpDown } from 'lucide-react';
+import { TableDataContext } from '@/context/TableDataContext';
 
 export const SortTasks = () => {
+  const ctx = useContext(TableDataContext);
+  if (!ctx) throw new Error('SortTasks must be inside TableDataProvider');
+  const { tasks, setTasks } = ctx;
+
+  // true = ascending, false = descending
+  const [ascending, setAscending] = useState(true);
+
+  const handleSort = (isAsc: boolean) => {
+    setAscending(isAsc);
+
+    const sortedTasks = [...tasks].sort((a, b) => {
+      const dateA = new Date(a.dueDate).getTime();
+      const dateB = new Date(b.dueDate).getTime();
+      return isAsc ? dateA - dateB : dateB - dateA;
+    });
+
+    setTasks(sortedTasks);
+  };
+
   return (
     <DropdownMenu.DropdownMenu>
       <DropdownMenu.DropdownMenuTrigger asChild>
@@ -20,12 +40,18 @@ export const SortTasks = () => {
           Sort by Due Date
         </DropdownMenu.DropdownMenuLabel>
         <DropdownMenu.DropdownMenuSeparator />
-        <DropdownMenu.DropdownMenuCheckboxItem checked={true}>
-          Ascending Order
-        </DropdownMenu.DropdownMenuCheckboxItem>
-        <DropdownMenu.DropdownMenuCheckboxItem>
-          Descending Order
-        </DropdownMenu.DropdownMenuCheckboxItem>
+
+        <DropdownMenu.DropdownMenuRadioGroup
+          value={ascending ? 'asc' : 'desc'}
+          onValueChange={(val) => handleSort(val === 'asc')}
+        >
+          <DropdownMenu.DropdownMenuRadioItem value="asc">
+            Ascending Order
+          </DropdownMenu.DropdownMenuRadioItem>
+          <DropdownMenu.DropdownMenuRadioItem value="desc">
+            Descending Order
+          </DropdownMenu.DropdownMenuRadioItem>
+        </DropdownMenu.DropdownMenuRadioGroup>
       </DropdownMenu.DropdownMenuContent>
     </DropdownMenu.DropdownMenu>
   );

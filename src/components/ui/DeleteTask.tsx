@@ -2,8 +2,25 @@ import { Trash2 } from 'lucide-react';
 import { Button } from './button';
 import * as Dialog from './dialog';
 import * as Table from './table';
+import { useContext } from 'react';
+import { TableDataContext } from '@/context/TableDataContext';
+import { CancelFormDialog } from './CancelFormDialog';
 
-export const DeleteTask = () => {
+interface DeleteTaskProps {
+  taskId: number;
+}
+
+export const DeleteTask: React.FC<DeleteTaskProps> = ({ taskId }) => {
+  const ctx = useContext(TableDataContext);
+  if (!ctx) throw new Error('DeleteTask must be inside TableDataProvider');
+  const { setTasks } = ctx;
+
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    setTasks((prev) => prev.filter((t) => t.id !== taskId));
+  };
+
   return (
     <Table.TableCell>
       <Dialog.Dialog>
@@ -19,17 +36,10 @@ export const DeleteTask = () => {
             </Dialog.DialogTitle>
           </Dialog.DialogHeader>
           <Dialog.DialogFooter>
-            <Dialog.DialogClose asChild>
-              <Button
-                type="button"
-                className="rounded font-medium border-[var(--color-prime)] text-[var(--color-prime)] hover:border-[var(--color-hover-prime)] hover:text-[var(--color-hover-prime)]"
-                variant="outline"
-              >
-                Cancel
-              </Button>
-            </Dialog.DialogClose>
+            <CancelFormDialog />
 
             <Button
+              onClick={handleDelete}
               className="rounded font-medium bg-[var(--color-prime)] hover:bg-[var(--color-hover-prime)]"
               type="submit"
             >
