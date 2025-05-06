@@ -19,3 +19,5 @@ export * from './TasksHeader';
 export * from './DataTable';
 export * from './DataTableHeader';
 export * from './DataTableBody';
+export * from './DataTableMobile';
+export * from './TaskListPage';

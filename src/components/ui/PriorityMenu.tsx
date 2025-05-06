@@ -10,6 +10,8 @@ type PriorityMenuProps = {
   priority: Priority;
 };
 
+const textSize = 'sm:text-xs md:text-sm';
+
 export const PriorityMenu: React.FC<PriorityMenuProps> = ({
   taskId,
   priority,
@@ -21,7 +23,7 @@ export const PriorityMenu: React.FC<PriorityMenuProps> = ({
   return (
     <DropdownMenu.DropdownMenu>
       <DropdownMenu.DropdownMenuTrigger asChild>
-        <Button className="flex items-center" variant="outline">
+        <Button className={`flex items-center ${textSize}`} variant="outline">
           {priority} <ChevronDown />
         </Button>
       </DropdownMenu.DropdownMenuTrigger>

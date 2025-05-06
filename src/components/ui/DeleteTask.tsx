@@ -22,11 +22,11 @@ export const DeleteTask: React.FC<DeleteTaskProps> = ({ taskId }) => {
   };
 
   return (
-    <Table.TableCell>
+    <Table.TableCell className="p-0 md:p-2">
       <Dialog.Dialog>
         <Dialog.DialogTrigger asChild>
           <Button variant={'ghost'}>
-            <Trash2 className="size-5" />
+            <Trash2 className="size-4 lg:size-5" />
           </Button>
         </Dialog.DialogTrigger>
         <Dialog.DialogContent className="max-w-[350px] sm:max-w-[350px]">

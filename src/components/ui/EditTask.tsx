@@ -60,11 +60,15 @@ export const EditTask: React.FC<EditTaskProps> = ({ task }) => {
   };
 
   return (
-    <Table.TableCell className="">
+    <Table.TableCell className="p-0 md:p-2">
       <Dialog.Dialog open={open} onOpenChange={setOpen}>
         <Dialog.DialogTrigger asChild>
-          <Button onClick={() => setOpen(true)} variant={'ghost'}>
-            <SquarePen className="size-5" />
+          <Button
+            onClick={() => setOpen(true)}
+            className="pd-0"
+            variant={'ghost'}
+          >
+            <SquarePen className="size-4 lg:size-5" />
           </Button>
         </Dialog.DialogTrigger>
         <Dialog.DialogContent className="sm:max-w-[425px]">
