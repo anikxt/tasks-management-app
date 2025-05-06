@@ -3,7 +3,7 @@ import { SearchInput } from './SearchInput';
 
 export const Navbar = () => {
   return (
-    <div className="flex justify-between items-center pt-16 pb-2">
+    <div className="flex justify-between items-center pb-2">
       <Logo />
       <SearchInput />
     </div>
