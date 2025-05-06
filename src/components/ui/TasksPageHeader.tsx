@@ -4,7 +4,7 @@ import { TaskActions } from './TaskActions';
 
 export const TasksPageHeader = () => {
   return (
-    <div className="flex justify-between font-semibold pb-8">
+    <div className="flex justify-between font-semibold pb-4 sm:pb-8">
       <TasksHeader />
       <TaskActions />
     </div>

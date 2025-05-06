@@ -11,7 +11,7 @@ export const SearchInput = () => {
   if (!ctx) {
     throw new Error('SearchInput must be rendered inside a TableDataProvider');
   }
-  const { masterTasks, setMasterTasks, displayTasks, setDisplayTasks } = ctx;
+  const { masterTasks, setDisplayTasks } = ctx;
 
   const [search, setSearch] = useState('');
   const [debounced, setDebounced] = useState(search);
@@ -89,7 +89,7 @@ export const SearchInput = () => {
       <div
         className={`${
           mobileOpen ? 'flex gap-3 items-center' : 'hidden'
-        } sm:hidden relative w-full`}
+        } sm:hidden relative w-full py-4 sm:py-0`}
       >
         <Search
           className="absolute left-3 top-1/2 -translate-y-1/2 text-search"
