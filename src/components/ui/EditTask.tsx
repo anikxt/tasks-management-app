@@ -9,7 +9,6 @@ import * as Dialog from './dialog';
 import { DueDate } from './DueDate';
 import { FormFillAlert } from './FormFillAlert';
 import { Status } from './Status';
-import * as Table from './table';
 import { Title } from './Title';
 
 interface EditTaskProps {
@@ -21,7 +20,7 @@ export const EditTask: React.FC<EditTaskProps> = ({ task }) => {
   if (!ctx) {
     throw new Error('EditTask must be rendered inside a TableDataProvider');
   }
-  const { masterTasks, setMasterTasks, displayTasks, setDisplayTasks } = ctx;
+  const { setMasterTasks, setDisplayTasks } = ctx;
 
   // control Add Task dialog open state
   const [open, setOpen] = useState(false);

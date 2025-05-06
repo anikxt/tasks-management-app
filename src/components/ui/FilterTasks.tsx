@@ -11,7 +11,7 @@ export const FilterTasks = () => {
   if (!ctx) {
     throw new Error('FilterTask must be rendered inside a TableDataProvider');
   }
-  const { masterTasks, setMasterTasks, displayTasks, setDisplayTasks } = ctx;
+  const { masterTasks, setDisplayTasks } = ctx;
 
   // filter state: undefined = no filter
   const [priorityFilter, setPriorityFilter] = useState<Priority | undefined>(

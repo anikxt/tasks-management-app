@@ -33,7 +33,7 @@ export const SearchInput = () => {
       );
       setDisplayTasks(filteredTasks);
     }
-  }, [debounced, masterTasks]);
+  }, [debounced, masterTasks, setDisplayTasks]);
 
   // mobileOpen context
   const mobilectx = useContext(MobileOpenContext);

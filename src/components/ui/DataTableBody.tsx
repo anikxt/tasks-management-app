@@ -13,7 +13,7 @@ export const DataTableBody = () => {
     );
   }
 
-  const { masterTasks, setMasterTasks, displayTasks, setDisplayTasks } = ctx;
+  const { displayTasks } = ctx;
 
   return (
     <Table.TableBody>
