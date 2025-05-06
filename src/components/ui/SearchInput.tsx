@@ -63,10 +63,14 @@ export const SearchInput = () => {
       } sm:flex-0`}
     >
       {/* sm+ sizes */}
-      <div className="hidden sm:flex sm:min-w-xs md:min-w-sm lg:min-w-md">
+      <div className="hidden sm:flex sm:min-w-xs md:min-w-sm lg:min-w-md relative w-full">
+        <Search
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-search"
+          size={20}
+        />
         <Input
           onChange={(e) => setSearch(e.target.value)}
-          className="rounded border-search text-black"
+          className="rounded border-search text-black pl-10 w-full"
           type="text"
           placeholder="Search"
         />
@@ -76,7 +80,7 @@ export const SearchInput = () => {
       <div className={`${mobileOpen ? 'hidden' : 'flex'} sm:hidden`}>
         <Button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="p-4 py-6 bg-[var(--color-prime)]"
+          className="p-4 py-6 bg-prime"
         >
           <Search className="size-6" />
         </Button>
@@ -85,11 +89,15 @@ export const SearchInput = () => {
       <div
         className={`${
           mobileOpen ? 'flex gap-3 items-center' : 'hidden'
-        } sm:hidden`}
+        } sm:hidden relative w-full`}
       >
+        <Search
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-search"
+          size={20}
+        />
         <Input
           onChange={(e) => setSearch(e.target.value)}
-          className="rounded border-search text-black"
+          className="rounded border-search text-black pl-10 w-full"
           type="text"
           placeholder="Search"
         />
@@ -101,7 +109,7 @@ export const SearchInput = () => {
           }}
           className="p-2 border border-search"
         >
-          <CircleX className="size-6 text-[var(--color-search)]" />
+          <CircleX className="size-6 text-search" />
         </Button>
       </div>
     </div>
