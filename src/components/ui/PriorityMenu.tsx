@@ -18,7 +18,21 @@ export const PriorityMenu: React.FC<PriorityMenuProps> = ({
 }) => {
   const ctx = useContext(TableDataContext);
   if (!ctx) throw new Error('PriorityMenu must be inside TableDataProvider');
-  const { setTasks } = ctx;
+  const { masterTasks, setMasterTasks, displayTasks, setDisplayTasks } = ctx;
+
+  const handleSetPriority = (val: Priority) => {
+    setMasterTasks((prev) =>
+      prev.map((t) =>
+        t.id === taskId ? { ...t, priority: val as Priority } : t
+      )
+    );
+
+    setDisplayTasks((prev) =>
+      prev.map((t) =>
+        t.id === taskId ? { ...t, priority: val as Priority } : t
+      )
+    );
+  };
 
   return (
     <DropdownMenu.DropdownMenu>
@@ -30,13 +44,7 @@ export const PriorityMenu: React.FC<PriorityMenuProps> = ({
       <DropdownMenu.DropdownMenuContent className="w-56">
         <DropdownMenu.DropdownMenuRadioGroup
           value={priority}
-          onValueChange={(val) =>
-            setTasks((prev) =>
-              prev.map((t) =>
-                t.id === taskId ? { ...t, priority: val as Priority } : t
-              )
-            )
-          }
+          onValueChange={(val) => handleSetPriority(val as Priority)}
         >
           <DropdownMenu.DropdownMenuRadioItem value="High">
             High

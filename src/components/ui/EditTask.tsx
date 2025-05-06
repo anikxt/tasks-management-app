@@ -21,7 +21,7 @@ export const EditTask: React.FC<EditTaskProps> = ({ task }) => {
   if (!ctx) {
     throw new Error('EditTask must be rendered inside a TableDataProvider');
   }
-  const { setTasks } = ctx;
+  const { masterTasks, setMasterTasks, displayTasks, setDisplayTasks } = ctx;
 
   // control Add Task dialog open state
   const [open, setOpen] = useState(false);
@@ -53,14 +53,20 @@ export const EditTask: React.FC<EditTaskProps> = ({ task }) => {
       status,
     };
 
-    setTasks((prev) => prev.map((t) => (t.id === task.id ? updatedTask : t)));
+    setMasterTasks((prev) =>
+      prev.map((t) => (t.id === task.id ? updatedTask : t))
+    );
+
+    setDisplayTasks((prev) =>
+      prev.map((t) => (t.id === task.id ? updatedTask : t))
+    );
 
     form.reset();
     setOpen(false);
   };
 
   return (
-    <Table.TableCell className="p-0 md:p-2">
+    <>
       <Dialog.Dialog open={open} onOpenChange={setOpen}>
         <Dialog.DialogTrigger asChild>
           <Button
@@ -98,6 +104,6 @@ export const EditTask: React.FC<EditTaskProps> = ({ task }) => {
       </Dialog.Dialog>
 
       <FormFillAlert showAlert={showAlert} setShowAlert={setShowAlert} />
-    </Table.TableCell>
+    </>
   );
 };

@@ -1,12 +1,10 @@
 import { TableDataContext } from '@/context/TableDataContext';
-import React, { useContext, useEffect, useState } from 'react';
+import { ChevronDown } from 'lucide-react';
+import { useContext, useEffect, useState } from 'react';
 import { Button } from './button';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { Status } from './Status';
-import { PriorityMenu } from './PriorityMenu';
-import { EditTask } from './EditTask';
 import { DeleteTask } from './DeleteTask';
-import { Task } from '@/data/tasks';
+import { EditTask } from './EditTask';
+import { PriorityMenu } from './PriorityMenu';
 
 export const DataTableMobile = () => {
   const ctx = useContext(TableDataContext);
@@ -17,13 +15,13 @@ export const DataTableMobile = () => {
     );
   }
 
-  const { tasks } = ctx;
+  const { displayTasks } = ctx;
 
   const [isHidden, setIsHidden] = useState<boolean[]>([]);
 
   useEffect(() => {
-    setIsHidden(new Array(tasks.length).fill(true));
-  }, [tasks]);
+    setIsHidden(new Array(displayTasks.length).fill(true));
+  }, [displayTasks.length]);
 
   const handleToggleVisibility = (index: number) => {
     setIsHidden((prev) => {
@@ -35,7 +33,7 @@ export const DataTableMobile = () => {
 
   return (
     <div className="sm:hidden border-2 border-[var(--color-prime)] rounded-lg overflow-hidden">
-      {tasks.map((task, index) => (
+      {displayTasks.map((task, index) => (
         <div key={task.id}>
           <div
             className={`${

@@ -11,7 +11,7 @@ export const SearchInput = () => {
   if (!ctx) {
     throw new Error('SearchInput must be rendered inside a TableDataProvider');
   }
-  const { setTasks, originalTasks } = ctx;
+  const { masterTasks, setMasterTasks, displayTasks, setDisplayTasks } = ctx;
 
   const [search, setSearch] = useState('');
   const [debounced, setDebounced] = useState(search);
@@ -26,14 +26,14 @@ export const SearchInput = () => {
   // run filter whenever the debounced value changes
   useEffect(() => {
     if (!debounced) {
-      setTasks(originalTasks);
+      setDisplayTasks(masterTasks);
     } else {
-      const filteredTasks = originalTasks.filter((task) =>
+      const filteredTasks = masterTasks.filter((task) =>
         task.title.toLowerCase().includes(debounced.toLowerCase())
       );
-      setTasks(filteredTasks);
+      setDisplayTasks(filteredTasks);
     }
-  }, [debounced, originalTasks, setTasks]);
+  }, [debounced, masterTasks]);
 
   // mobileOpen context
   const mobilectx = useContext(MobileOpenContext);

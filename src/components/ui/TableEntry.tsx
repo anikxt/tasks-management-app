@@ -54,8 +54,13 @@ export const TableEntry: React.FC<TableEntryProps> = ({ task, index }) => {
         <PriorityMenu taskId={task.id} priority={task.priority} />
       </Table.TableCell>
 
-      <EditTask task={task} />
-      <DeleteTask taskId={task.id} />
+      <Table.TableCell className="p-0 md:p-2">
+        <EditTask task={task} />
+      </Table.TableCell>
+
+      <Table.TableCell className="p-0 md:p-2">
+        <DeleteTask taskId={task.id} />
+      </Table.TableCell>
     </Table.TableRow>
   );
 };

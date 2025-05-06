@@ -13,12 +13,12 @@ export const DataTableBody = () => {
     );
   }
 
-  const { tasks } = ctx;
+  const { masterTasks, setMasterTasks, displayTasks, setDisplayTasks } = ctx;
 
   return (
     <Table.TableBody>
-      {tasks.length > 0 ? (
-        tasks.map((task, index) => (
+      {displayTasks.length > 0 ? (
+        displayTasks.map((task, index) => (
           <TableEntry key={task.id} task={task} index={index} />
         ))
       ) : (

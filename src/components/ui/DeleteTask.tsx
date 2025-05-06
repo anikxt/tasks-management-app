@@ -13,16 +13,17 @@ interface DeleteTaskProps {
 export const DeleteTask: React.FC<DeleteTaskProps> = ({ taskId }) => {
   const ctx = useContext(TableDataContext);
   if (!ctx) throw new Error('DeleteTask must be inside TableDataProvider');
-  const { setTasks } = ctx;
+  const { masterTasks, setMasterTasks, displayTasks, setDisplayTasks } = ctx;
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    setTasks((prev) => prev.filter((t) => t.id !== taskId));
+    setMasterTasks((prev) => prev.filter((t) => t.id !== taskId));
+    setDisplayTasks((prev) => prev.filter((t) => t.id !== taskId));
   };
 
   return (
-    <Table.TableCell className="p-0 md:p-2">
+    <>
       <Dialog.Dialog>
         <Dialog.DialogTrigger asChild>
           <Button variant={'ghost'}>
@@ -48,6 +49,6 @@ export const DeleteTask: React.FC<DeleteTaskProps> = ({ taskId }) => {
           </Dialog.DialogFooter>
         </Dialog.DialogContent>
       </Dialog.Dialog>
-    </Table.TableCell>
+    </>
   );
 };
