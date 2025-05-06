@@ -60,7 +60,7 @@ export const AddTask = () => {
         <Dialog.DialogTrigger asChild>
           <Button
             onClick={() => setOpen(true)}
-            className="rounded font-semibold bg-[var(--color-prime)] hover:bg-[var(--color-hover-prime)]"
+            className="rounded font-semibold bg-[var(--color-prime)] hover:bg-[var(--color-hover-prime)] flex-1"
           >
             <Plus className="size-5" />
             <span className="pt-[1px] pr-1">Add Task</span>

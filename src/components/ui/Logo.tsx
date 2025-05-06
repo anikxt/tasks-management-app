@@ -6,13 +6,13 @@ export const Logo = () => {
   if (!ctx) {
     throw new Error('Logo must be rendered inside a MobileOpenProvider');
   }
-  const { mobileOpen, setMobileOpen } = ctx;
+  const { mobileOpen } = ctx;
 
   return (
     <img
       className={`${
         mobileOpen ? 'hidden' : 'flex'
-      } sm:flex h-[80px] md:h-[100px] w-[160px] md:w-[200px]`}
+      } sm:flex h-[80px] md:h-[100px] w-[160px] md:w-[200px] relative sm:top-[-20] sm:left-[-40]`}
       src="https://www.studio137.co.za/images/studio137-logo.png"
       alt="Studio 137 Digital Media Solution"
     />
