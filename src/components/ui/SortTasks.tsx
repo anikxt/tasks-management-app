@@ -7,7 +7,7 @@ import { TableDataContext } from '@/context/TableDataContext';
 export const SortTasks = () => {
   const ctx = useContext(TableDataContext);
   if (!ctx) throw new Error('SortTasks must be inside TableDataProvider');
-  const { masterTasks, setDisplayTasks, displayTasks } = ctx;
+  const { setDisplayTasks, displayTasks } = ctx;
 
   // true = ascending, false = descending
   const [ascending, setAscending] = useState(true);
