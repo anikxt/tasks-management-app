@@ -16,7 +16,7 @@ export const AddTask = () => {
   if (!ctx) {
     throw new Error('AddTask must be rendered inside a TableDataProvider');
   }
-  const { setMasterTasks, setDisplayTasks } = ctx;
+  const { setMasterTasks } = ctx;
 
   // state
   // control Add Task dialog open state
@@ -49,7 +49,6 @@ export const AddTask = () => {
     };
 
     setMasterTasks((prevTasks) => [...prevTasks, newTask]);
-    setDisplayTasks((prevTasks) => [...prevTasks, newTask]);
 
     form.reset();
     setOpen(false);
