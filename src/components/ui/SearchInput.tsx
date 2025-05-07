@@ -80,6 +80,8 @@ export const SearchInput = () => {
           size={20}
         />
         <Input
+          name="search"
+          autoComplete="off"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           className="rounded border-search text-black pl-10 w-full"
@@ -108,6 +110,8 @@ export const SearchInput = () => {
           size={20}
         />
         <Input
+          name="search"
+          autoComplete="off"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           className="rounded border-search text-black pl-10 w-full"
