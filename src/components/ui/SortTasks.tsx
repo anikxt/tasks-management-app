@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
-import * as DropdownMenu from './dropdown-menu';
-import { Button } from './button';
-import { ArrowUpDown } from 'lucide-react';
 import { TableDataContext } from '@/context/TableDataContext';
+import { ArrowUpDown } from 'lucide-react';
+import { useContext } from 'react';
+import { Button } from './button';
+import * as DropdownMenu from './dropdown-menu';
 
 export const SortTasks = () => {
   const ctx = useContext(TableDataContext);

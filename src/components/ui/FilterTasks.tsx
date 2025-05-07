@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
-import * as DropdownMenu from './dropdown-menu';
-import { Button } from './button';
-import { ListFilter } from 'lucide-react';
 import { TableDataContext } from '@/context/TableDataContext';
 import { Priority, Status } from '@/data/tasks';
+import { ListFilter } from 'lucide-react';
+import { useContext } from 'react';
+import { Button } from './button';
+import * as DropdownMenu from './dropdown-menu';
 
 export const FilterTasks = () => {
   // context

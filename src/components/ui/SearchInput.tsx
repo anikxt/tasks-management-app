@@ -37,7 +37,14 @@ export const SearchInput = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [inputValue]);
+  }, [
+    inputValue,
+    ,
+    setPriorityFilter,
+    setSearch,
+    setSortOrder,
+    setStatusFilter,
+  ]);
 
   // mobileOpen context
   const mobilectx = useContext(MobileOpenContext);
