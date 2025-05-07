@@ -11,29 +11,33 @@ export const SearchInput = () => {
   if (!ctx) {
     throw new Error('SearchInput must be rendered inside a TableDataProvider');
   }
-  const { masterTasks, setDisplayTasks } = ctx;
 
-  const [search, setSearch] = useState('');
-  const [debounced, setDebounced] = useState(search);
+  const {
+    search,
+    setSearch,
+    setPriorityFilter,
+    setStatusFilter,
+    setSortOrder,
+  } = ctx;
+
+  // local search input value
+  const [inputValue, setInputValue] = useState(search);
 
   // update debounced value after 300ms of no typing
   useEffect(() => {
-    const handler = setTimeout(() => setDebounced(search), 300);
+    // reset filters and sort order when search input is changed
+    setPriorityFilter(undefined);
+    setStatusFilter(undefined);
+    setSortOrder(undefined);
 
-    return () => clearTimeout(handler);
-  }, [search]);
+    const timer = setTimeout(() => {
+      setSearch(inputValue.trim());
+    }, 300);
 
-  // run filter whenever the debounced value changes
-  useEffect(() => {
-    if (!debounced) {
-      setDisplayTasks(masterTasks);
-    } else {
-      const filteredTasks = masterTasks.filter((task) =>
-        task.title.toLowerCase().includes(debounced.toLowerCase())
-      );
-      setDisplayTasks(filteredTasks);
-    }
-  }, [debounced, masterTasks, setDisplayTasks]);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [inputValue]);
 
   // mobileOpen context
   const mobilectx = useContext(MobileOpenContext);
@@ -69,7 +73,8 @@ export const SearchInput = () => {
           size={20}
         />
         <Input
-          onChange={(e) => setSearch(e.target.value)}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
           className="rounded border-search text-black pl-10 w-full"
           type="text"
           placeholder="Search"
@@ -96,7 +101,8 @@ export const SearchInput = () => {
           size={20}
         />
         <Input
-          onChange={(e) => setSearch(e.target.value)}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
           className="rounded border-search text-black pl-10 w-full"
           type="text"
           placeholder="Search"
@@ -104,8 +110,9 @@ export const SearchInput = () => {
         <Button
           variant={'outline'}
           onClick={() => {
-            setMobileOpen(false);
+            setInputValue('');
             setSearch('');
+            setMobileOpen(false);
           }}
           className="p-2 border border-search"
         >

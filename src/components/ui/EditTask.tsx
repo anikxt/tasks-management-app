@@ -20,7 +20,7 @@ export const EditTask: React.FC<EditTaskProps> = ({ task }) => {
   if (!ctx) {
     throw new Error('EditTask must be rendered inside a TableDataProvider');
   }
-  const { setMasterTasks, setDisplayTasks } = ctx;
+  const { setMasterTasks } = ctx;
 
   // control Add Task dialog open state
   const [open, setOpen] = useState(false);
@@ -53,10 +53,6 @@ export const EditTask: React.FC<EditTaskProps> = ({ task }) => {
     };
 
     setMasterTasks((prev) =>
-      prev.map((t) => (t.id === task.id ? updatedTask : t))
-    );
-
-    setDisplayTasks((prev) =>
       prev.map((t) => (t.id === task.id ? updatedTask : t))
     );
 

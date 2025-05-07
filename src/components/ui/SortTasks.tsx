@@ -7,22 +7,7 @@ import { TableDataContext } from '@/context/TableDataContext';
 export const SortTasks = () => {
   const ctx = useContext(TableDataContext);
   if (!ctx) throw new Error('SortTasks must be inside TableDataProvider');
-  const { setDisplayTasks, displayTasks } = ctx;
-
-  // true = ascending, false = descending
-  const [ascending, setAscending] = useState(true);
-
-  const handleSort = (isAsc: boolean) => {
-    setAscending(isAsc);
-
-    const sortedTasks = [...displayTasks].sort((a, b) => {
-      const dateA = new Date(a.dueDate).getTime();
-      const dateB = new Date(b.dueDate).getTime();
-      return isAsc ? dateA - dateB : dateB - dateA;
-    });
-
-    setDisplayTasks(sortedTasks);
-  };
+  const { sortOrder, setSortOrder } = ctx;
 
   return (
     <DropdownMenu.DropdownMenu>
@@ -42,8 +27,12 @@ export const SortTasks = () => {
         <DropdownMenu.DropdownMenuSeparator />
 
         <DropdownMenu.DropdownMenuRadioGroup
-          value={ascending ? 'asc' : 'desc'}
-          onValueChange={(val) => handleSort(val === 'asc')}
+          value={sortOrder}
+          onValueChange={(val) =>
+            setSortOrder((prev) =>
+              prev === val ? undefined : (val as 'asc' | 'desc')
+            )
+          }
         >
           <DropdownMenu.DropdownMenuRadioItem value="asc">
             Ascending Order

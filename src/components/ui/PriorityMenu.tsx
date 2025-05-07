@@ -18,16 +18,10 @@ export const PriorityMenu: React.FC<PriorityMenuProps> = ({
 }) => {
   const ctx = useContext(TableDataContext);
   if (!ctx) throw new Error('PriorityMenu must be inside TableDataProvider');
-  const { setMasterTasks, setDisplayTasks } = ctx;
+  const { setMasterTasks } = ctx;
 
   const handleSetPriority = (val: Priority) => {
     setMasterTasks((prev) =>
-      prev.map((t) =>
-        t.id === taskId ? { ...t, priority: val as Priority } : t
-      )
-    );
-
-    setDisplayTasks((prev) =>
       prev.map((t) =>
         t.id === taskId ? { ...t, priority: val as Priority } : t
       )

@@ -11,35 +11,8 @@ export const FilterTasks = () => {
   if (!ctx) {
     throw new Error('FilterTask must be rendered inside a TableDataProvider');
   }
-  const { masterTasks, setDisplayTasks } = ctx;
-
-  // filter state: undefined = no filter
-  const [priorityFilter, setPriorityFilter] = useState<Priority | undefined>(
-    undefined
-  );
-
-  const [statusFilter, setStatusFilter] = useState<Status | undefined>(
-    undefined
-  );
-
-  // when filters change, recompute tasks
-  useEffect(() => {
-    let filteredTasks = masterTasks;
-
-    if (priorityFilter) {
-      filteredTasks = filteredTasks.filter(
-        (task) => task.priority === priorityFilter
-      );
-    }
-
-    if (statusFilter) {
-      filteredTasks = filteredTasks.filter(
-        (task) => task.status === statusFilter
-      );
-    }
-
-    setDisplayTasks(filteredTasks);
-  }, [masterTasks, priorityFilter, statusFilter, setDisplayTasks]);
+  const { priorityFilter, statusFilter, setPriorityFilter, setStatusFilter } =
+    ctx;
 
   return (
     <DropdownMenu.DropdownMenu>
