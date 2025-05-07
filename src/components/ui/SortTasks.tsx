@@ -7,7 +7,7 @@ import { TableDataContext } from '@/context/TableDataContext';
 export const SortTasks = () => {
   const ctx = useContext(TableDataContext);
   if (!ctx) throw new Error('SortTasks must be inside TableDataProvider');
-  const { masterTasks, setDisplayTasks } = ctx;
+  const { masterTasks, setDisplayTasks, displayTasks } = ctx;
 
   // true = ascending, false = descending
   const [ascending, setAscending] = useState(true);
@@ -15,7 +15,7 @@ export const SortTasks = () => {
   const handleSort = (isAsc: boolean) => {
     setAscending(isAsc);
 
-    const sortedTasks = [...masterTasks].sort((a, b) => {
+    const sortedTasks = [...displayTasks].sort((a, b) => {
       const dateA = new Date(a.dueDate).getTime();
       const dateB = new Date(b.dueDate).getTime();
       return isAsc ? dateA - dateB : dateB - dateA;
