@@ -1,7 +1,5 @@
 # 📝 Tasks Management Web App
 
-> ॥ नमो मञ्जुश्रीकुमारभूताय ॥
-
 A responsive tasks management application built with **Next.js** and **TypeScript**, designed as part of a frontend challenge.
 
 ---
